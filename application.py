@@ -18,11 +18,17 @@ def home():
 def load_user_page(userid):
     json_url = os.path.join(SITE_ROOT, "static/db", userid + ".json")
     data = json.load(open(json_url, 'r'))
-    ingredients = data['Ingredients']
+    ingredients = []
+
+    for i in data['Ingredients']:
+        ingredients.append(i['Name'])
+
     recipe_ids = recipes.search_recipes(ingredients)
     recipe_list = []
     for i in recipe_ids[:20]:
         recipe_list.append(recipes.get_recipe(i))
+
+    print recipe_list
 
     return render_template('user.html', ing=ingredients, recipes=recipe_list)
 
