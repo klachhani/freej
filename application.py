@@ -43,7 +43,6 @@ def load_user_page(userid):
             t = threading.Thread(target=worker, args=(i,))
             threads.append(t)
             t.start()
-            t.join()
 
         for t in threads:
             t.join()
