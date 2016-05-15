@@ -21,6 +21,8 @@ h1, h2, h3, h4, h5, h6 {
     color: #222;
     font-weight: 600;
     line-height: 1.3em;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 h2 {
@@ -71,4 +73,12 @@ img {
 .recipeimage{
     width:138px;
     height:100px;
+}
+
+.jumbotron {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #eee;
 }

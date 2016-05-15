@@ -21,7 +21,9 @@ def load_user_page(userid):
         json_url = os.path.join(SITE_ROOT, "static/db", userid + ".json")
         with open(json_url, 'r') as data_file:
             data = json.load(data_file)
+        return data
 
+    def get_user_ingredients_names(data):
         ingredients = []
         for i in data['Ingredients']:
             ingredients.append(i['Name'])
@@ -48,13 +50,13 @@ def load_user_page(userid):
 
         return recipe_list
 
-
-    ingredients = get_user_info(userid)
+    user_data = get_user_info(userid)
+    ingredients = get_user_ingredients_names(user_data)
     recipe_list = get_user_recipes(ingredients)
 
     print len(recipe_list)
 
-    return render_template('user.html', ing=ingredients, recipes=recipe_list)
+    return render_template('user.html', ing=get_user_info(userid)['Ingredients'], recipes=recipe_list)
 
 
 
