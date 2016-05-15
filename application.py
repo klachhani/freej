@@ -1,13 +1,9 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
-from flask.ext.assets import Environment, Bundle
 import json
 import os
 
 application = Flask(__name__)
 application.debug = True
-
-assets = Environment()
-assets.init_app(application)
 
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))

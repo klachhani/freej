@@ -32,5 +32,8 @@ def get_recipe(recipe_id):
 
 
 c = search_recipes(['pears', 'tomato', 'pasta', 'cheese', 'milk'])
+delim = '%2C'
+q = ''
 for i in c[0]:
-    print i
+    q += i + delim
+print q[:]
