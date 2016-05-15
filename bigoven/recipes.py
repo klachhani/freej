@@ -53,4 +53,21 @@ def get_recipe(recipe_id):
         #recipe['Servings'] = data['Servings']
         recipe['Instructions'] = data['Instructions']
 
+
+        ingandprep = []
+        ingredients = data['Ingredients']
+        for i in ingredients:
+            name = i['Name']
+
+            metric = str(i['MetricQuantity']) + ' | ' + i['MetricUnit']
+            unit_i = i['Unit'] if i['Unit'] != None else ''
+            imperial = str(i['Quantity']) + ' | ' + unit_i
+            if i['Name'].lower() in ['salt', 'pepper']:
+                metric = imperial
+            prep = str(i['PreparationNotes']) if i['PreparationNotes'] != None else ''
+
+            ingandprep.append(name.title() + ' | ' + metric + '; ' + prep.capitalize())
+
+        recipe['Ingredients'] = ingandprep
+
     return recipe

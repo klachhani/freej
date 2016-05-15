@@ -116,6 +116,14 @@
                     </div>
                 </a>
                 <div class="panel-body collapse" id="{{r.id}}">
+                    <h3>Ingredients</h3>
+
+                    {% for i in r.Ingredients %}
+
+                    <p>{{i}}</p>
+
+                    {% endfor %}
+
                     <h4>Servings: {{ r.YieldNumber|int }}</h4>
                     <h3>Instructions</h3>
                     <p>{{ r.Instructions }}</p>
@@ -124,13 +132,6 @@
 
 
             {% endfor %}
-
-
-
-
-
-
-
 
 
             <div class="panel panel-default" id="accordion">
