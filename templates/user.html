@@ -99,7 +99,7 @@
                 </div>
             </div>
 
-            {% for r in recipies %}
+            {% for r in recipes %}
 
             <div class="panel panel-default" id="accordion">
                 <a href="#{{r.id}}" data-toggle="collapse" data-parent="#accordion">
@@ -107,22 +107,18 @@
                         <h4>{{r.Title}}</h4>
                         <div class="row">
                             <div class="col-md-2">
-                                <img src="ImageURL" class="Recipeimage">
+                                <img src="{{ r.ImageURL }}" class="Recipeimage">
                             </div>
                             <div class="col-md-10">
-                                <p>"Description"</p>
+                                <p>{{ r.Description }}</p>
                             </div>
                         </div>
                     </div>
                 </a>
                 <div class="panel-body collapse" id="{{r.id}}">
-                    <p>
-                    Insert Ingredient API loop here<br>
-                    <br>
-                    "YieldNumber" + "Servings"<br>
-                    <br>
-                    "Instructions"
-                    </p>
+                    <h4>Servings: {{ r.YieldNumber|int }}</h4>
+                    <h3>Instructions</h3>
+                    <p>{{ r.Instructions }}</p>
                 </div>
             </div>
 
@@ -143,7 +139,6 @@
                         <h4>"Title"</h4>
                         <div class="row">
                             <div class="col-md-2">
-                                <img src="ImageURL" class="Recipeimage">
                             </div>
                             <div class="col-md-10">
                                 <p>"Description"</p>

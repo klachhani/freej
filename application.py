@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 import json
 import os
 import bigoven.recipes as recipes
+import threading
 
 application = Flask(__name__)
 application.debug = True
@@ -16,19 +17,42 @@ def home():
 
 @application.route('/user/<userid>')
 def load_user_page(userid):
-    json_url = os.path.join(SITE_ROOT, "static/db", userid + ".json")
-    data = json.load(open(json_url, 'r'))
-    ingredients = []
+    def get_user_info(userid):
+        json_url = os.path.join(SITE_ROOT, "static/db", userid + ".json")
+        with open(json_url, 'r') as data_file:
+            data = json.load(data_file)
 
-    for i in data['Ingredients']:
-        ingredients.append(i['Name'])
+        ingredients = []
+        for i in data['Ingredients']:
+            ingredients.append(i['Name'])
+        return ingredients
 
-    recipe_ids = recipes.search_recipes(ingredients)
-    recipe_list = []
-    for i in recipe_ids[:20]:
-        recipe_list.append(recipes.get_recipe(i))
+    def get_user_recipes(ingredients):
+        def worker(recipe_id):
+            r = recipes.get_recipe(recipe_id)
+            print r
+            recipe_list.append(r)
 
-    print recipe_list
+        recipe_ids = recipes.search_recipes(ingredients)
+        print recipe_ids
+
+        recipe_list = []
+        threads = []
+        for i in recipe_ids[:20]:
+            t = threading.Thread(target=worker, args=(i,))
+            threads.append(t)
+            t.start()
+
+        for t in threads:
+            t.join()
+
+        return recipe_list
+
+
+    ingredients = get_user_info(userid)
+    recipe_list = get_user_recipes(ingredients)
+
+    print len(recipe_list)
 
     return render_template('user.html', ing=ingredients, recipes=recipe_list)
 
@@ -36,5 +60,11 @@ def load_user_page(userid):
 
 if __name__ == '__main__':
     application.run()
+
+
+
+
+
+
 
 
