@@ -1,0 +1,29 @@
+{
+  "username": "Testy McTestcase",
+  "Ingredients": [
+    {"Name": "Green Peppers",
+      "Measure": null,
+      "Quantity": 5,
+      "Unit": null,
+      "Expiry-date": "21 05 2016"
+    },
+    {"Name": "Mushrooms",
+      "Measure": null,
+      "Quantity": 6,
+      "Unit": null,
+      "Expiry-date": "18 05 2016"
+    },
+    {"Name": "Onions",
+      "Measure": "Metric",
+      "Quantity": 2,
+      "Unit": "kg",
+      "Expiry-date": "29 05 2016"
+    },
+    {"Name": "Beef Mince",
+      "Measure": "Metric",
+      "Quantity": 200,
+      "Unit": "g",
+      "Expiry-date": "5 06 2016"
+    }
+  ]
+}

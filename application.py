@@ -43,6 +43,7 @@ def load_user_page(userid):
             t = threading.Thread(target=worker, args=(i,))
             threads.append(t)
             t.start()
+            t.join()
 
         for t in threads:
             t.join()
@@ -50,12 +51,11 @@ def load_user_page(userid):
         recipe_list = sorted(recipe_list, key=itemgetter('Title'), reverse=False)
         recipe_list = sorted(recipe_list, key=itemgetter('StarRating'), reverse=True)
 
-        for i in recipe_list:
-            print i['StarRating']
         return recipe_list
 
     user_data = get_user_info(userid)
     ingredients = get_user_ingredients_names(user_data)
+    print ingredients
     recipe_list = get_user_recipes(ingredients)
 
     return render_template('user.html', ing=get_user_info(userid)['Ingredients'], recipes=recipe_list)
