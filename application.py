@@ -3,6 +3,7 @@ import json
 import os
 import bigoven.recipes as recipes
 import threading
+from operator import itemgetter
 
 application = Flask(__name__)
 application.debug = True
@@ -32,29 +33,31 @@ def load_user_page(userid):
     def get_user_recipes(ingredients):
         def worker(recipe_id):
             r = recipes.get_recipe(recipe_id)
-            print r
             recipe_list.append(r)
 
         recipe_ids = recipes.search_recipes(ingredients)
-        print recipe_ids
-
         recipe_list = []
         threads = []
-        for i in recipe_ids[:20]:
+
+        for i in recipe_ids:
             t = threading.Thread(target=worker, args=(i,))
             threads.append(t)
             t.start()
+            t.join()
 
         for t in threads:
             t.join()
 
+        recipe_list = sorted(recipe_list, key=itemgetter('Title'), reverse=False)
+        recipe_list = sorted(recipe_list, key=itemgetter('StarRating'), reverse=True)
+
+        for i in recipe_list:
+            print i['StarRating']
         return recipe_list
 
     user_data = get_user_info(userid)
     ingredients = get_user_ingredients_names(user_data)
     recipe_list = get_user_recipes(ingredients)
-
-    print len(recipe_list)
 
     return render_template('user.html', ing=get_user_info(userid)['Ingredients'], recipes=recipe_list)
 
