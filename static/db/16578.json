@@ -1,0 +1,41 @@
+{
+  "username": "Testy McTestcase",
+  "Ingredients": [
+    {"Name": "Tomatoes",
+      "Measure": null,
+      "Quantity": 5,
+      "Unit": null,
+      "Expiry-date": "21 05 2016"
+    },
+    {"Name": "Chicken Breast",
+      "Measure": null,
+      "Quantity": 3,
+      "Unit": null,
+      "Expiry-date": "18 05 2016"
+    },
+    {"Name": "Potato",
+      "Measure": "Metric",
+      "Quantity": 2,
+      "Unit": "kg",
+      "Expiry-date": "29 05 2016"
+    },
+    {"Name": "Cheese",
+      "Measure": "Metric",
+      "Quantity": 200,
+      "Unit": "g",
+      "Expiry-date": "5 06 2016"
+    },
+    {"Name": "Milk",
+      "Mesaure": "Imperial",
+      "Quantity": 500,
+      "Unit": "ml",
+      "Expiry-date": "17 05 2016"
+    },
+    {"Name": "Pasta",
+      "Mesaure": "Metric",
+      "Quantity": 2,
+      "Unit": "kg",
+      "Expiry-date": "7 09 2016"
+    }
+  ]
+}

@@ -1,16 +1,17 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+freej = Flask(__name__)
 
+freej.debug = True
 
-@app.route('/')
+@freej.route('/')
 def home():
     return 'Hello World!'
 
-@app.route('/user/<userid>')
+@freej.route('/user/<userid>')
 def load_user_page(userid):
     return 'Hey, youre userid is %s' % userid
 
 
 if __name__ == '__main__':
-    app.run()
+    freej.run()
